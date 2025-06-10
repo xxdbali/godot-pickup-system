@@ -1,0 +1,119 @@
+[gd_scene load_steps=18 format=3 uid="uid://bjacc0ay2g2qm"]
+
+[ext_resource type="Script" uid="uid://cldwq56cmtxg5" path="res://character_body_3d.gd" id="1_u52ul"]
+[ext_resource type="Script" uid="uid://h3q8smxe1qy" path="res://object_picker_node.gd" id="2_vonw3"]
+[ext_resource type="VideoStream" uid="uid://hkg1fi2jftuy" path="res://video/levigame2.ogv" id="3_oi3di"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5xgho"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5xgho"]
+size = Vector2(30, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u52ul"]
+
+[sub_resource type="Environment" id="Environment_vonw3"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_oi3di"]
+
+[sub_resource type="Compositor" id="Compositor_0b4ue"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u52ul"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u52ul"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u52ul"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vonw3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_oi3di"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oi3di"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_oi3di")
+
+[sub_resource type="BoxMesh" id="BoxMesh_0b4ue"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_oi3di")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_5xgho")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_5xgho")
+surface_material_override/0 = SubResource("StandardMaterial3D_u52ul")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vonw3")
+camera_attributes = SubResource("CameraAttributesPractical_oi3di")
+compositor = SubResource("Compositor_0b4ue")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.382941, 0.923773, 0, -0.923773, 0.382941, 0, 0.768162, 0)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24087, 0)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_u52ul")
+
+[node name="CameraPivot" type="Node3D" parent="Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.651783, 0)
+
+[node name="ObjectPickupRayCast" type="RayCast3D" parent="Player/CameraPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.651783, 0)
+target_position = Vector3(0, -3, 0)
+collision_mask = 5
+debug_shape_custom_color = Color(0, 1, 0, 1)
+debug_shape_thickness = 5
+
+[node name="Hand" type="Node3D" parent="Player/CameraPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_u52ul")
+
+[node name="ObjectPickerNode" type="Node" parent="Player" node_paths=PackedStringArray("ray_cast")]
+script = ExtResource("2_vonw3")
+ray_cast = NodePath("../CameraPivot/Camera3D/ObjectPickupRayCast")
+held_object_parent_node_path = NodePath("../CameraPivot/Camera3D/Hand")
+
+[node name="RigidBody3D4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2166, 3.21003, 7.03832)
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_u52ul")
+metadata/pickable = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D4"]
+mesh = SubResource("BoxMesh_u52ul")
+skeleton = NodePath("../../RigidBody3D4")
+surface_material_override/0 = SubResource("StandardMaterial3D_vonw3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D4"]
+shape = SubResource("BoxShape3D_u52ul")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+stream = ExtResource("3_oi3di")
+autoplay = true
+loop = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.6, 3)
+mesh = SubResource("BoxMesh_0b4ue")
