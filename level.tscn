@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bjacc0ay2g2qm"]
+[gd_scene load_steps=15 format=3 uid="uid://bjacc0ay2g2qm"]
 
 [ext_resource type="Script" uid="uid://cldwq56cmtxg5" path="res://character_body_3d.gd" id="1_u52ul"]
 [ext_resource type="Script" uid="uid://h3q8smxe1qy" path="res://object_picker_node.gd" id="2_vonw3"]
+[ext_resource type="PackedScene" uid="uid://2ftrpv61ocvu" path="res://loot_box.tscn" id="3_0b4ue"]
 [ext_resource type="VideoStream" uid="uid://hkg1fi2jftuy" path="res://video/levigame2.ogv" id="3_oi3di"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5xgho"]
@@ -19,24 +20,18 @@ size = Vector2(30, 30)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u52ul"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u52ul"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_u52ul"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vonw3"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_oi3di"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oi3di"]
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_oi3di")
+uv1_scale = Vector3(3, 1.845, 3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0b4ue"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_oi3di")
+size = Vector3(16, 0.01, 9)
 
 [node name="Node3D" type="Node3D"]
 
@@ -89,23 +84,11 @@ script = ExtResource("2_vonw3")
 ray_cast = NodePath("../CameraPivot/Camera3D/ObjectPickupRayCast")
 held_object_parent_node_path = NodePath("../CameraPivot/Camera3D/Hand")
 
-[node name="RigidBody3D4" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2166, 3.21003, 7.03832)
-collision_mask = 7
-physics_material_override = SubResource("PhysicsMaterial_u52ul")
-metadata/pickable = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D4"]
-mesh = SubResource("BoxMesh_u52ul")
-skeleton = NodePath("../../RigidBody3D4")
-surface_material_override/0 = SubResource("StandardMaterial3D_vonw3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D4"]
-shape = SubResource("BoxShape3D_u52ul")
-
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-render_target_update_mode = 4
+size = Vector2i(2048, 1500)
+size_2d_override_stretch = true
+render_target_clear_mode = 2
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewport"]
 offset_right = 40.0
@@ -115,5 +98,23 @@ autoplay = true
 loop = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.6, 3)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.05448, -14.5743)
 mesh = SubResource("BoxMesh_0b4ue")
+
+[node name="RigidBody3D4" parent="." instance=ExtResource("3_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5272, 1.01885, 6.32368)
+
+[node name="RigidBody3D5" parent="." instance=ExtResource("3_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56756, 1.46693, -5.89069)
+
+[node name="RigidBody3D6" parent="." instance=ExtResource("3_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45132, 0.540333, -4.3005)
+
+[node name="RigidBody3D7" parent="." instance=ExtResource("3_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.93643, 0.697664, 2.63067)
+
+[node name="RigidBody3D8" parent="." instance=ExtResource("3_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4519, 0.708676, -10.7282)
+
+[node name="RigidBody3D9" parent="." instance=ExtResource("3_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.14507, 0.594269, -0.573955)
