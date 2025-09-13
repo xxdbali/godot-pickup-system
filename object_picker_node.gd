@@ -15,8 +15,6 @@ var original_collision_mask: int = 1
 signal object_picked_up(object_node: Node)
 signal object_dropped(object_node: Node)
 
-var inventory: Array = []
-
 func _ready():
 	if not ray_cast:
 		push_error("RayCast3D node not assigned!")
@@ -98,8 +96,9 @@ func drop_object():
 		var throw_dir = - camera.global_transform.basis.z
 		held_object.apply_central_force(throw_dir * throw_force)
 
-	held_object = null
 	emit_signal("object_dropped", held_object)
+	
+	held_object = null
 	print("Dropped object.")
 
 func store_held_object_to_inventory():
@@ -107,25 +106,29 @@ func store_held_object_to_inventory():
 		return
 	
 	var item = InventoryItem.new()
+
 	item.scene_path = held_object.scene_file_path if held_object.has_method("get_scene_file_path") else ""
 	item.transform = held_object.global_transform
 	for key in held_object.get_meta_list():
 		item.metadata[key] = held_object.get_meta(key)
 	
-	inventory.append(item)
+	InventoryHub.append(item)
+		
 	held_object.queue_free()
 	held_object = null
 	print("Stored object to inventory.")
 
 func restore_last_inventory_item():
-	if inventory.is_empty():
+	if InventoryHub.is_empty():
 		print("Inventory is empty.")
 		return
 	if held_object:
 		print("Already holding an object. Drop it first.")
 		return
 
-	var item = inventory.pop_back()
+
+	var item = InventoryHub.pop_back()
+
 	var scene = load(item.scene_path)
 	if not scene:
 		print("Failed to load scene from inventory item.")

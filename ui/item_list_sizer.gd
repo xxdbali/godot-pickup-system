@@ -19,9 +19,3 @@ func update_children_size():
                 # Crucially, we set the custom minimum size.
                 # This is what a container uses to determine the layout size of its children.
                 child.set_custom_minimum_size(Vector2(new_size, new_size))
-                
-                # The container automatically re-sorts its children after their minimum size is updated.
-                # We can confirm the new size by printing the child's minimum size.
-                print("Child's Minimum Size: ", child.get_minimum_size())
-        
-        print("Parent's Size: ", parent_size_x)

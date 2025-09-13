@@ -1,22 +1,26 @@
 extends Control
 class_name inventory_ui
 
-@export var categories: PackedStringArray = ["quick", "backpack", "quest"]
+@export var categories: PackedStringArray = ["quick", "backpack", "body"]
+@export var quick_access_instance: NodePath
+@export var backpack_instance: NodePath
+@export var body_instance: NodePath
+
 @export var start_hidden := true
 
 # New: scenes and per-tab slot counts / layout
 @export var slot_scene: PackedScene
-@export var item_scene: PackedScene
+@export var inventory_item_scene: PackedScene
 @export var tab_slot_counts: Dictionary = {
 	"quick": 10,
 	"backpack": 30,
-	"quest": 8,
+	"body": 8,
 }
 @export var default_columns: int = 5
 @export var per_tab_columns: Dictionary = {
 	"quick": 5,
 	"backpack": 6,
-	"quest": 4,
+	"body": 4,
 }
 
 const ICON_WOOD_PATH := "res://icons/wood.png"
@@ -25,7 +29,7 @@ const ICON_WOOD_PATH := "res://icons/wood.png"
 
 func _ready() -> void:
 	# demo mount: quick tab, slot index 2
-	if item_scene != null:
+	if inventory_item_scene != null:
 		var wood_tex := load(ICON_WOOD_PATH) as Texture2D
 		if wood_tex == null:
 			push_warning("inventory_ui: Could not load icon at %s" % ICON_WOOD_PATH)
@@ -39,15 +43,12 @@ func _ready() -> void:
 	if start_hidden:
 		hide()
 
-func _find_first_tabcontainer() -> TabContainer:
-	var queue: Array = [self]
-	while queue.size() > 0:
-		var n := queue.pop_front() as Node
-		if n is TabContainer:
-			return n as TabContainer
-		for c in n.get_children():
-			queue.push_back(c)
-	return null
+	InventoryHub.inventory_changed.connect(_on_inventory_changed)
+
+func _on_inventory_changed(inventory: Array) -> void:
+	print("Inventory updated, total items: %d" % inventory.size())
+	# Sync slots if needed
+	# parse all tabs and slots, clear existing items
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_toggle_inventory"):
@@ -80,7 +81,7 @@ func mount_item(tab_name: StringName, index: int, props: Dictionary) -> void:
 	# for c in slot.get_children():
 	#	c.queue_free()
 
-	var item := item_scene.instantiate()
+	var item := inventory_item_scene.instantiate()
 	# Optional props: item_id, item_name, qty, icon (Texture2D)
 	if props.has("item_id"): item.item_id = props.item_id
 	if props.has("item_name"): item.item_name = props.item_name

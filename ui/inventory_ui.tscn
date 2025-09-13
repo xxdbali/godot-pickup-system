@@ -14,6 +14,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_80bpo")
+quick_access_instance = NodePath("MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2")
+backpack_instance = NodePath("MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2")
+body_instance = NodePath("MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2")
 slot_scene = ExtResource("2_lsmr7")
 tabs = NodePath("MarginContainer/tabs")
 
