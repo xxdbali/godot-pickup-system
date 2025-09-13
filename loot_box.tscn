@@ -1,12 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://2ftrpv61ocvu"]
+[gd_scene load_steps=8 format=3 uid="uid://2ftrpv61ocvu"]
 
 [ext_resource type="Script" uid="uid://kielivusu1ar" path="res://loot_box.gd" id="1_5dwai"]
+[ext_resource type="Texture2D" uid="uid://bebqcht5fwi0j" path="res://textures/box_wood.png" id="2_gfucb"]
+[ext_resource type="Texture2D" uid="uid://cuxq0aorbcvs2" path="res://textures/box_normal.png" id="3_k86u5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u52ul"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u52ul"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vonw3"]
+albedo_texture = ExtResource("2_gfucb")
+normal_enabled = true
+normal_texture = ExtResource("3_k86u5")
+uv1_offset = Vector3(0.5, 0.5, 0)
+uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
 

@@ -1,0 +1,251 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwqwjgrg3wrwh"]
+
+[ext_resource type="Script" uid="uid://ru170y0v2uur" path="res://ui/inventory_tabs.gd" id="2_80bpo"]
+[ext_resource type="Script" uid="uid://ccls75jds5m4y" path="res://ui/item_list_sizer.gd" id="2_j1vmf"]
+[ext_resource type="PackedScene" uid="uid://snxdgklyhdyp" path="res://ui/inventory_slot.tscn" id="2_lsmr7"]
+[ext_resource type="Script" uid="uid://bfr6e0bwnlcsv" path="res://ui/auto_margin.gd" id="2_wij5n"]
+
+[node name="inventory_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_wij5n")
+
+[node name="tabs" type="TabContainer" parent="MarginContainer"]
+layout_mode = 2
+current_tab = 0
+script = ExtResource("2_80bpo")
+
+[node name="quick_bar" type="VBoxContainer" parent="MarginContainer/tabs"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/tabs/quick_bar"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="left_margin_container" type="MarginContainer" parent="MarginContainer/tabs/quick_bar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ItemList2" type="HFlowContainer" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+script = ExtResource("2_j1vmf")
+
+[node name="inventory_slot" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot2" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot3" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot4" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot5" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot6" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot7" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot8" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot9" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot10" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot11" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/tabs/quick_bar/HBoxContainer"]
+layout_mode = 2
+
+[node name="right_margin_container" type="MarginContainer" parent="MarginContainer/tabs/quick_bar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ItemList2" type="HFlowContainer" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+script = ExtResource("2_j1vmf")
+
+[node name="inventory_slot" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot2" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot3" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot4" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot5" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot6" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot7" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot8" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot9" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot10" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot11" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/tabs/quick_bar"]
+layout_mode = 2
+
+[node name="slotX" type="VBoxContainer" parent="MarginContainer/tabs/quick_bar"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="bottom_margin_container" type="MarginContainer" parent="MarginContainer/tabs/quick_bar/slotX"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ItemList2" type="HFlowContainer" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+script = ExtResource("2_j1vmf")
+
+[node name="inventory_slot" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot3" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot4" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot5" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot6" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot7" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot8" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot9" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot10" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="inventory_slot11" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+layout_mode = 2
+
+[node name="options" type="VBoxContainer" parent="MarginContainer/tabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/tabs/options"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="left_container_margin" type="MarginContainer" parent="MarginContainer/tabs/options/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/tabs/options/HBoxContainer/left_container_margin"]
+layout_mode = 2
+
+[node name="config_label" type="Label" parent="MarginContainer/tabs/options/HBoxContainer/left_container_margin/VBoxContainer"]
+layout_mode = 2
+text = "Configs"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/tabs/options/HBoxContainer/left_container_margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/tabs/options/HBoxContainer"]
+layout_mode = 2
+
+[node name="right_container_margin2" type="MarginContainer" parent="MarginContainer/tabs/options/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/tabs/options/HBoxContainer/right_container_margin2"]
+layout_mode = 2
+
+[node name="buttons_label" type="Label" parent="MarginContainer/tabs/options/HBoxContainer/right_container_margin2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Options"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/tabs/options/HBoxContainer/right_container_margin2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="quit_button" type="Button" parent="MarginContainer/tabs/options/HBoxContainer/right_container_margin2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Exit to desktop"
+
+[node name="about" type="VBoxContainer" parent="MarginContainer/tabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2

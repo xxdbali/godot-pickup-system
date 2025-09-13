@@ -1,9 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://bjacc0ay2g2qm"]
+[gd_scene load_steps=19 format=3 uid="uid://bjacc0ay2g2qm"]
 
 [ext_resource type="Script" uid="uid://cldwq56cmtxg5" path="res://character_body_3d.gd" id="1_u52ul"]
+[ext_resource type="Texture2D" uid="uid://kffloxdb2q7a" path="res://textures/ground_sand_rock.png" id="2_1ainy"]
 [ext_resource type="Script" uid="uid://h3q8smxe1qy" path="res://object_picker_node.gd" id="2_vonw3"]
 [ext_resource type="PackedScene" uid="uid://2ftrpv61ocvu" path="res://loot_box.tscn" id="3_0b4ue"]
+[ext_resource type="Texture2D" uid="uid://clskq4rimebgb" path="res://textures/ground_sand_rock_specular.png" id="3_n6hdu"]
 [ext_resource type="VideoStream" uid="uid://hkg1fi2jftuy" path="res://video/levigame2.ogv" id="3_oi3di"]
+[ext_resource type="PackedScene" uid="uid://bwqwjgrg3wrwh" path="res://ui/inventory_ui.tscn" id="5_f2txt"]
+[ext_resource type="PackedScene" uid="uid://c3ekjg7xyycfr" path="res://miscelaneous/game_statistics_logger.tscn" id="6_km5ld"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5xgho"]
 
@@ -11,6 +15,10 @@
 size = Vector2(30, 30)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u52ul"]
+albedo_texture = ExtResource("2_1ainy")
+normal_enabled = true
+normal_texture = ExtResource("3_n6hdu")
+uv1_scale = Vector3(5, 5, 5)
 
 [sub_resource type="Environment" id="Environment_vonw3"]
 
@@ -34,6 +42,8 @@ material = SubResource("StandardMaterial3D_oi3di")
 size = Vector3(16, 0.01, 9)
 
 [node name="Node3D" type="Node3D"]
+
+[node name="inventory_ui" parent="." instance=ExtResource("5_f2txt")]
 
 [node name="Ground" type="StaticBody3D" parent="."]
 collision_layer = 4
@@ -84,6 +94,8 @@ script = ExtResource("2_vonw3")
 ray_cast = NodePath("../CameraPivot/Camera3D/ObjectPickupRayCast")
 held_object_parent_node_path = NodePath("../CameraPivot/Camera3D/Hand")
 
+[node name="CanvasLayer" parent="." instance=ExtResource("6_km5ld")]
+
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
 size = Vector2i(2048, 1500)
@@ -91,6 +103,7 @@ size_2d_override_stretch = true
 render_target_clear_mode = 2
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewport"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 stream = ExtResource("3_oi3di")
@@ -99,6 +112,7 @@ loop = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.05448, -14.5743)
+visible = false
 mesh = SubResource("BoxMesh_0b4ue")
 
 [node name="RigidBody3D4" parent="." instance=ExtResource("3_0b4ue")]

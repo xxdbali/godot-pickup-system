@@ -15,16 +15,17 @@ const ITEM_NAMES := [
 
 @onready var label := Label3D.new()
 var label_color := Color.WHITE
+var label_text := ITEM_NAMES[0]
 
 func _ready():
 	randomize()
 
 	# Use existing metadata if restoring from inventory
 	if not has_meta("item_name"):
-		var random_name = ITEM_NAMES[randi() % ITEM_NAMES.size()]
-		set_meta("item_name", random_name)
+		label_text = ITEM_NAMES[randi() % ITEM_NAMES.size()]
+		set_meta("item_name", label_text)
 	else:
-		var random_name = get_meta("item_name")
+		label_text = get_meta("item_name")
 
 	if not has_meta("item_color"):
 		label_color = Color(
@@ -37,14 +38,14 @@ func _ready():
 		label_color = get_meta("item_color")
 
 	# Setup label
-	label.text = get_meta("item_name")
+	label.text = label_text
 	label.position = Vector3(0, 1, 0)
 	label.modulate = label_color
 	label.font_size = 32
 	add_child(label)
 
 
-func _process(delta):
+func _process(_delta):
 	var camera = get_viewport().get_camera_3d()
 	if camera:
 		label.look_at(camera.global_transform.origin, Vector3.UP)

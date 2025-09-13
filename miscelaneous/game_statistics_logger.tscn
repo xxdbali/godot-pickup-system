@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3ekjg7xyycfr"]
+
+[ext_resource type="Script" uid="uid://bigpv8xuxi8po" path="res://miscelaneous/FPS_label.gd" id="1_j3fas"]
+
+[node name="game_statistics_logger" type="CanvasLayer"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_j3fas")

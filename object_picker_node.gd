@@ -1,9 +1,9 @@
 extends Node
 
-@export var ray_cast: RayCast3D = null 
+@export var ray_cast: RayCast3D = null
 @export var pick_up_distance := 2.0
 @export var throw_force := 10.0
-@export var held_object_parent_node_path : NodePath
+@export var held_object_parent_node_path: NodePath
 
 var held_object: RigidBody3D = null
 var camera: Camera3D = null
@@ -31,7 +31,7 @@ func _ready():
 
 	ray_cast.target_position = Vector3(0, 0, -pick_up_distance)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("pick"):
 		if held_object:
 			drop_object()
@@ -95,7 +95,7 @@ func drop_object():
 	held_object.set_sleeping(false)
 
 	if camera:
-		var throw_dir = -camera.global_transform.basis.z
+		var throw_dir = - camera.global_transform.basis.z
 		held_object.apply_central_force(throw_dir * throw_force)
 
 	held_object = null
