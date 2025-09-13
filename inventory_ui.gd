@@ -21,7 +21,7 @@ class_name inventory_ui
 
 const ICON_WOOD_PATH := "res://icons/wood.png"
 
-@onready var tabs: TabContainer = $MarginContainer/tabs
+@export var tabs: TabContainer
 
 func _ready() -> void:
 	# demo mount: quick tab, slot index 2
