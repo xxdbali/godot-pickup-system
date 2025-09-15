@@ -1,10 +1,15 @@
 extends Node
 
 # external class InventoryItem type array
-
+var INVENTORY_SIZE := 20
 var inventory: Array[InventoryItem] = []
 
 signal inventory_changed(inventory: Array)
+
+func is_full() -> bool:
+    if inventory.size() >= INVENTORY_SIZE:
+        return true
+    return false
 
 func append(item_data: InventoryItem) -> void:
     # item_data can contain item_id, item_name, qty, icon (Texture2D)

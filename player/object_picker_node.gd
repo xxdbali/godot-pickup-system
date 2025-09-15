@@ -86,7 +86,6 @@ func drop_object():
 		held_object.get_parent().remove_child(held_object)
 	world_root.add_child(held_object)
 	held_object.global_transform = drop_transform
-
 	held_object.gravity_scale = original_gravity_scale
 	held_object.collision_layer = original_collision_layer
 	held_object.collision_mask = original_collision_mask
@@ -104,15 +103,12 @@ func drop_object():
 func store_held_object_to_inventory():
 	if not held_object:
 		return
-	
-	var item = InventoryItem.new()
 
-	item.scene_path = held_object.scene_file_path if held_object.has_method("get_scene_file_path") else ""
-	item.transform = held_object.global_transform
-	for key in held_object.get_meta_list():
-		item.metadata[key] = held_object.get_meta(key)
-	
-	InventoryHub.append(item)
+	if InventoryHub.is_full():
+		print("Inventory is full.")
+		return
+
+	InventoryHub.append(held_object.get_inventory_item())
 		
 	held_object.queue_free()
 	held_object = null
@@ -122,22 +118,24 @@ func restore_last_inventory_item():
 	if InventoryHub.is_empty():
 		print("Inventory is empty.")
 		return
+		
 	if held_object:
 		print("Already holding an object. Drop it first.")
 		return
 
-
 	var item = InventoryHub.pop_back()
 
-	var scene = load(item.scene_path)
+	if !item:
+		print("Inventory item popped is empty.")
+		return
+
+	var scene = load(item.item_scene_path)
 	if not scene:
 		print("Failed to load scene from inventory item.")
 		return
 
 	var instance = scene.instantiate() as RigidBody3D
-	instance.global_transform = item.transform
-	for key in item.metadata:
-		instance.set_meta(key, item.metadata[key])
+	#instance.global_transform = item.transform
 
 	get_tree().current_scene.add_child(instance)
 	pick_up_object(instance)

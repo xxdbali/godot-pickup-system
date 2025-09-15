@@ -1,3 +1,23 @@
 {
-    "godotTools.editorPath.godot4": "d:\\Godot_v4.4-beta1_win64.exe"
+    "godotTools.editorPath.godot4": "d:\\Godot_v4.4-beta1_win64.exe",
+    // Use tabs for indentation in this workspace
+    "editor.insertSpaces": false,
+    // Tab size (visual) for tabs
+    "editor.tabSize": 4,
+    // Prevent VS Code from overriding with file content detection
+	"editor.detectIndentation": false,
+    // Ensure formatting tools respect tabs when possible
+    "[gdscript]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4
+    },
+    "[json]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4
+    },
+    "[jsonc]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4
+	},
+	"editor.guides.indentation": true
 }

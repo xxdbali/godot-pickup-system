@@ -1,9 +1,9 @@
 [gd_scene load_steps=19 format=3 uid="uid://bjacc0ay2g2qm"]
 
-[ext_resource type="Script" uid="uid://cldwq56cmtxg5" path="res://character_body_3d.gd" id="1_u52ul"]
+[ext_resource type="Script" uid="uid://cldwq56cmtxg5" path="res://player/character_body_3d.gd" id="1_u52ul"]
 [ext_resource type="Texture2D" uid="uid://kffloxdb2q7a" path="res://textures/ground_sand_rock.png" id="2_1ainy"]
-[ext_resource type="Script" uid="uid://h3q8smxe1qy" path="res://object_picker_node.gd" id="2_vonw3"]
-[ext_resource type="PackedScene" uid="uid://2ftrpv61ocvu" path="res://loot_box.tscn" id="3_0b4ue"]
+[ext_resource type="Script" uid="uid://h3q8smxe1qy" path="res://player/object_picker_node.gd" id="2_vonw3"]
+[ext_resource type="PackedScene" uid="uid://2ftrpv61ocvu" path="res://interactive_items/loot_box.tscn" id="3_0b4ue"]
 [ext_resource type="Texture2D" uid="uid://clskq4rimebgb" path="res://textures/ground_sand_rock_specular.png" id="3_n6hdu"]
 [ext_resource type="VideoStream" uid="uid://hkg1fi2jftuy" path="res://video/levigame2.ogv" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://bwqwjgrg3wrwh" path="res://ui/inventory_ui.tscn" id="5_f2txt"]
