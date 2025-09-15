@@ -28,28 +28,68 @@ const ICON_WOOD_PATH := "res://icons/wood.png"
 @export var tabs: TabContainer
 
 func _ready() -> void:
-	# demo mount: quick tab, slot index 2
-	if inventory_item_scene != null:
-		var wood_tex := load(ICON_WOOD_PATH) as Texture2D
-		if wood_tex == null:
-			push_warning("inventory_ui: Could not load icon at %s" % ICON_WOOD_PATH)
-		mount_item("quick", 2, {
-			"item_id": "wood",
-			"item_name": "Wood",
-			"qty": 12,
-			"icon": wood_tex
-		})
-
 	if start_hidden:
 		hide()
-
 	InventoryHub.inventory_changed.connect(_on_inventory_changed)
 
-func _on_inventory_changed(inventory: Array) -> void:
+func _on_inventory_changed(inventory: Array[InventoryItem]) -> void:
 	print("Inventory updated, total items: %d" % inventory.size())
-	# Sync slots if needed
-	# parse all tabs and slots, clear existing items
+	_clear_icons_in_slot_list(backpack_instance)
+	_fill_icons_in_slot_list(backpack_instance, inventory)
 
+func _clear_icons_in_slot_list(slot_list_instance: NodePath) -> void:
+	var container := get_node_or_null(slot_list_instance)
+	if container == null:
+		push_warning("inventory_ui: slot_list_instance not found: %s" % String(slot_list_instance))
+		return
+
+	#find all nested inventory_slot instances by group inventory_item_slot in the conotainer
+	var all_slots := container.get_tree().get_nodes_in_group("inventory_item_slot")
+	for slot in all_slots:
+		var all_items := slot.get_tree().get_nodes_in_group("inventory_item")
+		for item in all_items:
+			item.queue_free()
+
+func _fill_icons_in_slot_list(slot_list_instance: NodePath, inventory: Array[InventoryItem]) -> void:
+	var container := get_node_or_null(slot_list_instance)
+	if container == null:
+		push_warning("inventory_ui: slot_list_instance not found: %s" % String(slot_list_instance))
+		return
+	#find all nested inventory_slot instances by group inventory_slot_mount_item in the conotainer
+	var all_slots := container.get_tree().get_nodes_in_group("inventory_item_slot")
+	print("Total slots found: %d" % all_slots.size())
+	for i in range(min(inventory.size(), all_slots.size())):
+		var item_data := inventory[i]
+		# check if slot index exists if not just continue
+		if item_data.inventory_slot_index > all_slots.size() - 1:
+			continue
+		print("Placing item %s in slot index %d" % [item_data.name, item_data.inventory_slot_index])
+		if item_data.inventory_slot_index < 0:
+			item_data.inventory_slot_index = _find_next_free_slot_index(all_slots)
+		print("After check, item %s in slot index %d" % [item_data.name, item_data.inventory_slot_index])
+		if item_data.inventory_slot_index == -1:
+			print("No free slot found for item: %s" % item_data.name)
+			continue
+
+		var slot := all_slots[item_data.inventory_slot_index] as Node
+		var slot_mounting_node := slot.get_tree().get_nodes_in_group("inventory_slot_mount_item")
+		var item := inventory_item_scene.instantiate()
+		slot_mounting_node[0].add_child(item)
+		
+		var icon_holder := item.get_tree().get_nodes_in_group("inventory_item_icon")
+		icon_holder[0].texture = load(item_data.icon_path)
+		var icon_label := item.get_tree().get_nodes_in_group("inventory_item_label")
+		icon_label[0].text = str(item_data.qty)
+		
+
+func _find_next_free_slot_index(all_slots: Array[Node]) -> int:
+	for i in range(all_slots.size()):
+		var slot := all_slots[i]
+		var existing_items := slot.get_tree().get_nodes_in_group("inventory_item")
+		if existing_items.size() == 0:
+			return i
+	return -1
+		
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_toggle_inventory"):
 		_toggle_inventory()
@@ -62,37 +102,3 @@ func _toggle_inventory() -> void:
 
 func _release_toggle_mouse() -> void:
 	Input.action_release("toggle_mouse")
-
-func _get_slot(tab_name: StringName, index: int) -> Node:
-	var page := tabs.get_node_or_null(NodePath(tab_name)) as Control
-	if page == null:
-		return null
-	var grid := page.get_node_or_null("grid") as GridContainer
-	if grid == null:
-		return null
-	return grid.get_node_or_null("slot_%d" % index)
-
-func mount_item(tab_name: StringName, index: int, props: Dictionary) -> void:
-	var slot := _get_slot(tab_name, index)
-	if slot == null:
-		push_error("inventory_ui: slot not found: %s[%d]" % [String(tab_name), index])
-		return
-	# clear existing child if you want hard replace
-	# for c in slot.get_children():
-	#	c.queue_free()
-
-	var item := inventory_item_scene.instantiate()
-	# Optional props: item_id, item_name, qty, icon (Texture2D)
-	if props.has("item_id"): item.item_id = props.item_id
-	if props.has("item_name"): item.item_name = props.item_name
-	if props.has("qty"): item.qty = int(props.qty)
-	if props.has("icon"): item.icon = props.icon
-
-	slot.add_child(item)
-
-	# Ensure visual fills the slot and is visible
-	if item is Control:
-		var c := item as Control
-		c.set_anchors_preset(PRESET_FULL_RECT)
-		c.size_flags_horizontal = SIZE_EXPAND_FILL
-		c.size_flags_vertical = SIZE_EXPAND_FILL

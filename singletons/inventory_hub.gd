@@ -4,7 +4,7 @@ extends Node
 var INVENTORY_SIZE := 20
 var inventory: Array[InventoryItem] = []
 
-signal inventory_changed(inventory: Array)
+signal inventory_changed(inventory: Array[InventoryItem])
 
 func is_full() -> bool:
     if inventory.size() >= INVENTORY_SIZE:
@@ -12,8 +12,7 @@ func is_full() -> bool:
     return false
 
 func append(item_data: InventoryItem) -> void:
-    # item_data can contain item_id, item_name, qty, icon (Texture2D)
-    # You can expand this function to handle stacking, limits, etc.
+    print("Attempting to add item to inventory: ", item_data)
     inventory.append(item_data)
     emit_signal("inventory_changed", inventory)
     print("Item added to inventory: ", item_data)

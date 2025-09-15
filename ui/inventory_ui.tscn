@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwqwjgrg3wrwh"]
+[gd_scene load_steps=7 format=3 uid="uid://bwqwjgrg3wrwh"]
 
 [ext_resource type="Script" uid="uid://4fv6f6ltg8pb" path="res://ui/inventory_ui.gd" id="1_80bpo"]
 [ext_resource type="Script" uid="uid://ru170y0v2uur" path="res://ui/inventory_tabs.gd" id="2_80bpo"]
 [ext_resource type="Script" uid="uid://ccls75jds5m4y" path="res://ui/item_list_sizer.gd" id="2_j1vmf"]
 [ext_resource type="PackedScene" uid="uid://snxdgklyhdyp" path="res://ui/inventory_slot.tscn" id="2_lsmr7"]
 [ext_resource type="Script" uid="uid://bfr6e0bwnlcsv" path="res://ui/auto_margin.gd" id="2_wij5n"]
+[ext_resource type="PackedScene" uid="uid://y0lnngee4e5g" path="res://ui/inventory_item_icon.tscn" id="3_ihvlr"]
 
 [node name="inventory_ui" type="Control" node_paths=PackedStringArray("tabs")]
 layout_mode = 3
@@ -14,10 +15,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_80bpo")
-quick_access_instance = NodePath("MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2")
-backpack_instance = NodePath("MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2")
-body_instance = NodePath("MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2")
+quick_access_instance = NodePath("MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list")
+backpack_instance = NodePath("MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list")
+body_instance = NodePath("MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list")
 slot_scene = ExtResource("2_lsmr7")
+inventory_item_scene = ExtResource("3_ihvlr")
 tabs = NodePath("MarginContainer/tabs")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -39,12 +41,12 @@ script = ExtResource("2_80bpo")
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/tabs/quick_bar"]
+[node name="top_HBoxContainer" type="HBoxContainer" parent="MarginContainer/tabs/quick_bar"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="left_margin_container" type="MarginContainer" parent="MarginContainer/tabs/quick_bar/HBoxContainer"]
+[node name="left_margin_container" type="MarginContainer" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
@@ -52,50 +54,50 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ItemList2" type="HFlowContainer" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container"]
+[node name="inventory_slot_list" type="HFlowContainer" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 script = ExtResource("2_j1vmf")
 
-[node name="inventory_slot" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot2" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot2" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot3" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot3" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot4" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot4" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot5" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot5" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot6" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot6" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot7" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot7" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot8" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot8" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot9" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot9" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot10" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot10" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot11" parent="MarginContainer/tabs/quick_bar/HBoxContainer/left_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot11" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/left_margin_container/inventory_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/tabs/quick_bar/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer"]
 layout_mode = 2
 
-[node name="right_margin_container" type="MarginContainer" parent="MarginContainer/tabs/quick_bar/HBoxContainer"]
+[node name="right_margin_container" type="MarginContainer" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
@@ -103,54 +105,54 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ItemList2" type="HFlowContainer" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container"]
+[node name="body_slot_list" type="HFlowContainer" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 script = ExtResource("2_j1vmf")
 
-[node name="inventory_slot" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot2" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot2" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot3" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot3" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot4" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot4" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot5" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot5" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot6" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot6" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot7" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot7" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot8" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot8" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot9" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot9" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot10" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot10" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot11" parent="MarginContainer/tabs/quick_bar/HBoxContainer/right_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot11" parent="MarginContainer/tabs/quick_bar/top_HBoxContainer/right_margin_container/body_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/tabs/quick_bar"]
 layout_mode = 2
 
-[node name="slotX" type="VBoxContainer" parent="MarginContainer/tabs/quick_bar"]
+[node name="bottom_v_box_container" type="VBoxContainer" parent="MarginContainer/tabs/quick_bar"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="bottom_margin_container" type="MarginContainer" parent="MarginContainer/tabs/quick_bar/slotX"]
+[node name="bottom_margin_container" type="MarginContainer" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -159,41 +161,41 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ItemList2" type="HFlowContainer" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container"]
+[node name="quick_slot_list" type="HFlowContainer" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 script = ExtResource("2_j1vmf")
 
-[node name="inventory_slot" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot3" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot3" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot4" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot4" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot5" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot5" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot6" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot6" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot7" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot7" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot8" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot8" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot9" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot9" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot10" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot10" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
-[node name="inventory_slot11" parent="MarginContainer/tabs/quick_bar/slotX/bottom_margin_container/ItemList2" instance=ExtResource("2_lsmr7")]
+[node name="inventory_slot11" parent="MarginContainer/tabs/quick_bar/bottom_v_box_container/bottom_margin_container/quick_slot_list" instance=ExtResource("2_lsmr7")]
 layout_mode = 2
 
 [node name="options" type="VBoxContainer" parent="MarginContainer/tabs"]
