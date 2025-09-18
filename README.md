@@ -1,8 +1,6 @@
-# godot-pickup-system
+# Godot Pickup System (FPS) – Inventory, Loot & Persistence
 
-# Godot FPS Pickup System with Inventory & Save/Load Manager
-
-This project is a modular FPS-style object pickup system built in **Godot**, enhanced with an **inventory manager** and a **node store** for handling save/load functionality. It's ideal for first-person games that require dynamic interaction with objects, real-time inventory control, and persistent world state.
+This project is a modular FPS-style object pickup & loot system built in **Godot 4.4**, enhanced with an **inventory manager**, **item data conventions**, and foundations for a **save / restore flow**. It targets first‑person games needing dynamic interaction, stackable items, categorized loot, and a clean data-driven item model.
 
 ## 🚀 Features
 
@@ -25,8 +23,14 @@ This project is a modular FPS-style object pickup system built in **Godot**, enh
   - Handles loading and saving the entire game state
 
 - **Modular and Extensible**
+
   - Drop-in ready for new or existing Godot FPS projects
   - Easy to customize item behaviors and inventory logic
+  - Inspector-driven configuration for loot boxes (exported enum)
+
+- **Magnetic Pickup Behavior (Optional)**
+  - `fly_to_the_player.gd` makes nearby loot gravitate to the player if inventory has space
+  - Adjustable speed & activation radius
 
 ## 🧩 Use Cases
 
@@ -69,6 +73,36 @@ The system is divided into a few focused components:
 
 - `ui/inventory_item.gd` & related scenes provide a TextureRect-based visual for inventory slots.
 - Icons currently default (icon paths are blank placeholder values) – ready to be populated.
+
+### Loot Boxes (Configurable)
+
+`interactive_items/loot_box.gd` now exports an enum field:
+
+```gdscript
+@export var item_id: InventoryItemConventions.ItemID = InventoryItemConventions.ItemID.CRYSTAL_BLADE
+```
+
+This means every placed loot box can be configured in the Inspector to spawn any predefined item in the `ItemID` enum. When the scene runs, the script:
+
+1. Instantiates an `InventoryItem` using the selected enum value.
+2. Randomizes quantity if the item is stackable.
+3. Displays a floating `Label3D` above it with the item name.
+
+You can duplicate the loot box scene and assign different `item_id` values for quick prototyping of reward spots.
+
+### Magnetic Fly-To-Player
+
+`interactive_items/fly_to_the_player.gd` (attach to a `RigidBody3D` child or the loot object root) provides a QoL feature: when the player enters a radius (`collection_range`) the item accelerates toward the player at `fly_speed`—only if `InventoryHub` reports space (`InventoryHub.is_full()` returns false). The script tweaks `linear_damp` so the motion feels smooth.
+
+Tuning tips:
+
+| Property           | Suggestion                         |
+| ------------------ | ---------------------------------- |
+| `collection_range` | 4–6 for casual pickup; 2 for tight |
+| `fly_speed`        | 2–5 for medium pace; >8 is snappy  |
+| `linear_damp` end  | Increase if overshooting           |
+
+You can combine this with standard pickup so fast players don't have to precisely collide with items.
 
 ### Data Design Philosophy
 
@@ -151,6 +185,18 @@ Ideas for next steps:
 - Add durability / stats dictionaries to `InventoryItemBase` (still immutable).
 - Provide `InventoryItemFactory` for bulk generation with validation.
 
+## ➕ Adding a New Item
+
+1. Open `types/inventory_item_conventions.gd`.
+2. Add a new name to the `enum ItemID` (uppercase with underscores).
+3. Create a new `InventoryItemBase.new(...)` entry in `ITEM_SPEC_DATA` using that enum key.
+4. (Optional) Add an icon at `res://interactive_items/icons/` and use its path.
+5. (Optional) Provide a scene for world spawning (`item_scene_path`).
+
+If step 3 is skipped and you instantiate the ID, you'll hit a lookup error. Keeping enum + dictionary in sync is required.
+
+For large sets, consider splitting the big dictionary into chunked files and merging them at runtime.
+
 ## 🛠 Development Notes
 
 - Item base registry is static & loaded once; `get_item_spec` returns the original `InventoryItemBase`.
@@ -172,5 +218,41 @@ Ideas for next steps:
 PRs welcome. Keep item naming consistent and avoid magic numbers—prefer enums and helper methods.
 
 ## 📄 License
+
+## ▶️ Quick Start / Running
+
+1. Open the project in **Godot 4.4** (matches `project.godot` feature tag).
+2. Ensure the autoloads `InputHub` and `InventoryHub` are present (already configured in `project.godot`).
+3. Run the main scene (set in Project Settings -> Application -> Run).
+4. Controls (see `project.godot`):
+
+- Move: WASD
+- Jump: Space
+- Pick: E
+- Drop: Q
+- Store: F1 (or mapped key `ui_store`)
+- Restore: R
+- Toggle Inventory: I
+
+If you duplicate loot boxes and assign different `item_id`s you can quickly test variety.
+
+## 🧪 Testing Ideas (Manual)
+
+- Pick up a stackable item multiple times; verify quantity randomization stays within `1..max_stack`.
+- Fill inventory to capacity and observe fly-to-player stops engaging.
+- Change `fly_speed` mid-run (remote inspector) to tune feel.
+- Add a new enum entry and forget the dictionary row—confirm it errors (expected) then add the row to fix.
+
+## 🔮 Future Enhancements (Roadmap)
+
+- Weighted random loot table utility (rarity-aware)
+- Save/Load serialization for `InventoryHub` (JSON or binary Resource)
+- Per-item scripts (behavior injection) via `script_path` field
+- Networking considerations (authoritative pickup) for multiplayer
+- Accessibility: colorblind-friendly rarity indicators
+
+---
+
+Enjoy hacking on it. PRs and issue reports are welcome.
 
 See `LICENSE` for details.
