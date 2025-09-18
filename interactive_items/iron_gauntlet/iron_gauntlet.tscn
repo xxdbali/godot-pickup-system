@@ -12,6 +12,7 @@ collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_u52ul")
 script = ExtResource("1_5dwai")
 item_id = 1
+icon = "res://interactive_items/iron_gauntlet/item_icon/iron_guantlet_icon.png"
 metadata/pickable = true
 
 [node name="iron_gauntlet_mesh" parent="." instance=ExtResource("2_2yomo")]

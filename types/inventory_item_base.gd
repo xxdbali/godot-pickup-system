@@ -9,7 +9,6 @@ class_name InventoryItemBase
 @export var max_stack: int = 1
 @export var category: int
 @export var default_rarity: int
-@export var icon_path: String = ""
 
 func _init(
 	p_id: int = -1,
@@ -17,8 +16,7 @@ func _init(
 	p_is_stackable: bool = false,
 	p_max_stack: int = 1,
 	p_category: int = 0,
-	p_default_rarity: int = 0,
-	p_icon_path: String = "",
+	p_default_rarity: int = 0
 ) -> void:
 	base_entity_id = p_id
 	name = p_name
@@ -26,4 +24,3 @@ func _init(
 	max_stack = (max(1, p_max_stack) if p_is_stackable else 1)
 	category = p_category
 	default_rarity = p_default_rarity
-	icon_path = p_icon_path

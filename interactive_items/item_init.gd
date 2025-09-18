@@ -3,11 +3,12 @@ extends RigidBody3D
 @onready var label := Label3D.new()
 var inventory_item_instance: InventoryItem
 @export var item_id: InventoryItemConventions.ItemID = InventoryItemConventions.ItemID.CRYSTAL_BLADE
+@export var icon: String = "res://assets/icons/crystal_blade_icon.png"
 
 func _ready():
 	randomize()
 	var path = self.scene_file_path
-	inventory_item_instance = InventoryItem.new(item_id, path)
+	inventory_item_instance = InventoryItem.new(item_id, path, icon)
 	inventory_item_instance.transform = self.transform
 	if inventory_item_instance.is_stackable:
 		inventory_item_instance.qty = randi_range(1, inventory_item_instance.max_stack)

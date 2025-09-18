@@ -12,6 +12,7 @@ size = Vector3(0.200577, 1.90686, 0.707397)
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_u52ul")
 script = ExtResource("1_xgiav")
+icon = "res://interactive_items/cristal_blade/item_icon/cristal_blade_icon.png"
 metadata/pickable = true
 
 [node name="cristal_blade_model" parent="." instance=ExtResource("2_ryw1a")]
