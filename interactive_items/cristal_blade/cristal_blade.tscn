@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://1fvm5sfsxtwl"]
+[gd_scene load_steps=7 format=3 uid="uid://1fvm5sfsxtwl"]
 
 [ext_resource type="Script" uid="uid://kielivusu1ar" path="res://interactive_items/item_init.gd" id="1_xgiav"]
 [ext_resource type="PackedScene" uid="uid://c4di8ufy4t734" path="res://interactive_items/cristal_blade/item_model/cristal_blade.glb" id="2_ryw1a"]
+[ext_resource type="PackedScene" uid="uid://bfsbd4ulnrni6" path="res://interactive_items/fly_to_the_player.tscn" id="3_0n68i"]
+[ext_resource type="PackedScene" uid="uid://3y1keg86kk4m" path="res://interactive_items/area_collider_auto_pick_up.tscn" id="4_5cfym"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u52ul"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
 size = Vector3(0.200577, 1.90686, 0.707397)
 
-[node name="cristal_blade" type="RigidBody3D"]
+[node name="cristal_blade" type="RigidBody3D" groups=["isPickable"]]
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_u52ul")
 script = ExtResource("1_xgiav")
@@ -20,3 +22,9 @@ metadata/pickable = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0242081, 0.0476685, -0.0139771)
 shape = SubResource("BoxShape3D_u52ul")
+
+[node name="fly_to_the_player" parent="." instance=ExtResource("3_0n68i")]
+fly_speed = 2.0
+collection_range = 5.0
+
+[node name="area_collider_to_pick_it_up" parent="." instance=ExtResource("4_5cfym")]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://3y1keg86kk4m"]
+
+[ext_resource type="Script" uid="uid://buua3p8jeax3m" path="res://interactive_items/area_collider_auto_pick_up.gd" id="1_lluwi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w4dio"]
+
+[node name="area_collider_to_pick_it_up" type="Area3D"]
+collision_layer = 524288
+collision_mask = 2
+script = ExtResource("1_lluwi")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_w4dio")

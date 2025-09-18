@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://y0lnngee4e5g"]
+[gd_scene load_steps=3 format=3 uid="uid://y0lnngee4e5g"]
 
-[ext_resource type="Texture2D" uid="uid://cc1dijlo7feep" path="res://interactive_items/icons/wood.png" id="1_wa0k3"]
+[ext_resource type="Texture2D" uid="uid://cc1dijlo7feep" path="res://icons/wood.png" id="1_wa0k3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wa0k3"]
+bg_color = Color(0, 0, 0, 0.92549)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [node name="inventory_item" type="Control" groups=["inventory_item"]]
 custom_minimum_size = Vector2(32, 32)
@@ -24,28 +31,32 @@ texture = ExtResource("1_wa0k3")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="panel" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0, 0, 0, 1)
+anchor_left = 0.6
+anchor_right = 1.0
+anchor_bottom = 0.4
+grow_horizontal = 0
 
-[node name="qty_label" type="Label" parent="ColorRect" groups=["inventory_item_label"]]
+[node name="ColorRect" type="Panel" parent="panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.09808e-05
+offset_right = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wa0k3")
+
+[node name="qty_label" type="Label" parent="panel" groups=["inventory_item_label"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "0"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1

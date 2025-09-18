@@ -1,13 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://2ftrpv61ocvu"]
+[gd_scene load_steps=8 format=3 uid="uid://2ftrpv61ocvu"]
 
 [ext_resource type="Script" uid="uid://kielivusu1ar" path="res://interactive_items/item_init.gd" id="1_5dwai"]
 [ext_resource type="PackedScene" uid="uid://s4bodicupj6a" path="res://interactive_items/iron_gauntlet/item_model/iron_gauntlet.glb" id="2_2yomo"]
+[ext_resource type="PackedScene" uid="uid://bfsbd4ulnrni6" path="res://interactive_items/fly_to_the_player.tscn" id="3_v3wlf"]
+[ext_resource type="PackedScene" uid="uid://3y1keg86kk4m" path="res://interactive_items/area_collider_auto_pick_up.tscn" id="4_3lv22"]
+[ext_resource type="Script" uid="uid://c5ars726fptbo" path="res://interactive_items/fly_to_the_player.gd" id="4_e184l"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u52ul"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
 
-[node name="iron_gauntlet" type="RigidBody3D"]
+[node name="iron_gauntlet" type="RigidBody3D" groups=["isPickable"]]
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_u52ul")
 script = ExtResource("1_5dwai")
@@ -21,3 +24,10 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 shape = SubResource("BoxShape3D_u52ul")
+
+[node name="fly_to_the_player" parent="." instance=ExtResource("3_v3wlf")]
+script = ExtResource("4_e184l")
+fly_speed = 2.0
+collection_range = 5.0
+
+[node name="area_collider_to_pick_it_up" parent="." instance=ExtResource("4_3lv22")]

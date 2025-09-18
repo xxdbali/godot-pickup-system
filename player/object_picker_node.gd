@@ -12,9 +12,6 @@ var original_gravity_scale: float = 1.0
 var original_collision_layer: int = 1
 var original_collision_mask: int = 1
 
-signal object_picked_up(object_node: Node)
-signal object_dropped(object_node: Node)
-
 func _ready():
 	if not ray_cast:
 		push_error("RayCast3D node not assigned!")
@@ -73,7 +70,6 @@ func pick_up_object(object_to_pick: RigidBody3D):
 	else:
 		push_error("No valid parent for held object.")
 
-	emit_signal("object_picked_up", held_object)
 	print("Picked up: ", held_object.name)
 
 func drop_object():
@@ -94,8 +90,6 @@ func drop_object():
 	if camera:
 		var throw_dir = - camera.global_transform.basis.z
 		held_object.apply_central_force(throw_dir * throw_force)
-
-	emit_signal("object_dropped", held_object)
 	
 	held_object = null
 	print("Dropped object.")

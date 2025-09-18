@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfsbd4ulnrni6"]
+
+[ext_resource type="Script" uid="uid://c5ars726fptbo" path="res://interactive_items/fly_to_the_player.gd" id="1_hxhu4"]
+
+[node name="fly_to_the_player" type="Node3D"]
+script = ExtResource("1_hxhu4")
+fly_speed = 3.0
+collection_range = 2.0
