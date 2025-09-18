@@ -1,13 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://bjacc0ay2g2qm"]
+[gd_scene load_steps=23 format=3 uid="uid://bjacc0ay2g2qm"]
 
 [ext_resource type="Script" uid="uid://cldwq56cmtxg5" path="res://player/character_body_3d.gd" id="1_u52ul"]
-[ext_resource type="Texture2D" uid="uid://kffloxdb2q7a" path="res://interactive_items/textures/ground_sand_rock.png" id="2_1ainy"]
+[ext_resource type="Texture2D" uid="uid://cw8hepywyxo6v" path="res://interactive_items/textures/unnamed.png" id="2_km5ld"]
 [ext_resource type="Script" uid="uid://h3q8smxe1qy" path="res://player/object_picker_node.gd" id="2_vonw3"]
-[ext_resource type="PackedScene" uid="uid://2ftrpv61ocvu" path="res://interactive_items/loot_box.tscn" id="3_0b4ue"]
-[ext_resource type="Texture2D" uid="uid://clskq4rimebgb" path="res://interactive_items/textures/ground_sand_rock_specular.png" id="3_n6hdu"]
+[ext_resource type="PackedScene" uid="uid://2ftrpv61ocvu" path="res://interactive_items/iron_gauntlet/iron_gauntlet.tscn" id="3_0b4ue"]
+[ext_resource type="Texture2D" uid="uid://c26ea7mwopwbd" path="res://interactive_items/textures/unnamed_ambient.png" id="3_2orkt"]
+[ext_resource type="Texture2D" uid="uid://dpq2w5kbvp58j" path="res://interactive_items/textures/unnamed_normal.png" id="3_8cye3"]
 [ext_resource type="VideoStream" uid="uid://hkg1fi2jftuy" path="res://video/levigame2.ogv" id="3_oi3di"]
+[ext_resource type="Texture2D" uid="uid://bo3qondsltgo6" path="res://interactive_items/textures/unnamed_displacement.png" id="4_2orkt"]
+[ext_resource type="Texture2D" uid="uid://kun0kmohmkwy" path="res://interactive_items/textures/unnamed_specular.png" id="5_aicyk"]
 [ext_resource type="PackedScene" uid="uid://bwqwjgrg3wrwh" path="res://ui/inventory_ui.tscn" id="5_f2txt"]
 [ext_resource type="PackedScene" uid="uid://c3ekjg7xyycfr" path="res://miscelaneous/game_statistics_logger.tscn" id="6_km5ld"]
+[ext_resource type="PackedScene" uid="uid://1fvm5sfsxtwl" path="res://interactive_items/cristal_blade/cristal_blade.tscn" id="12_aicyk"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5xgho"]
 
@@ -15,9 +19,15 @@
 size = Vector2(30, 30)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u52ul"]
-albedo_texture = ExtResource("2_1ainy")
+albedo_texture = ExtResource("2_km5ld")
+roughness_texture = ExtResource("5_aicyk")
 normal_enabled = true
-normal_texture = ExtResource("3_n6hdu")
+normal_texture = ExtResource("3_8cye3")
+rim_enabled = true
+rim_texture = ExtResource("4_2orkt")
+ao_enabled = true
+ao_texture = ExtResource("3_2orkt")
+ao_texture_channel = 4
 uv1_scale = Vector3(5, 5, 5)
 
 [sub_resource type="Environment" id="Environment_vonw3"]
@@ -110,25 +120,25 @@ stream = ExtResource("3_oi3di")
 autoplay = true
 loop = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="big_plasma_tv" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.05448, -14.5743)
 visible = false
 mesh = SubResource("BoxMesh_0b4ue")
 
-[node name="RigidBody3D4" parent="." instance=ExtResource("3_0b4ue")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5272, 1.01885, 6.32368)
+[node name="wood_box" parent="." instance=ExtResource("3_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08824, 0.5, -4.18502)
 
-[node name="RigidBody3D5" parent="." instance=ExtResource("3_0b4ue")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56756, 1.46693, -5.89069)
+[node name="wood_box2" parent="." instance=ExtResource("3_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.97971, 0.5, 0.365756)
 
-[node name="RigidBody3D6" parent="." instance=ExtResource("3_0b4ue")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45132, 0.540333, -4.3005)
+[node name="cristal_blade" parent="." instance=ExtResource("12_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43934, 0.995032, 0.355967)
 
-[node name="RigidBody3D7" parent="." instance=ExtResource("3_0b4ue")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.93643, 0.697664, 2.63067)
+[node name="cristal_blade2" parent="." instance=ExtResource("12_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.84179, 0.995032, -3.21)
 
-[node name="RigidBody3D8" parent="." instance=ExtResource("3_0b4ue")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4519, 0.708676, -10.7282)
+[node name="cristal_blade3" parent="." instance=ExtResource("12_aicyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.73456, 0.995032, -6.10881)
 
-[node name="RigidBody3D9" parent="." instance=ExtResource("3_0b4ue")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.14507, 0.594269, -0.573955)
+[node name="wood_box3" parent="." instance=ExtResource("3_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50605, 0.5, 1.80739)

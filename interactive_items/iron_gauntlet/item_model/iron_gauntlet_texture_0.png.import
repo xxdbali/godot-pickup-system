@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kffloxdb2q7a"
-path.s3tc="res://.godot/imported/ground_sand_rock.png-e75b11e835df090bdd4dbe2d14fb6db9.s3tc.ctex"
+uid="uid://c28qijhq3bj5w"
+path.s3tc="res://.godot/imported/iron_gauntlet_texture_0.png-eaefbb80e91756a955e49f01ad893811.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "d0513680385eea7c104489c238fe94c0"
+}
 
 [deps]
 
-source_file="res://interactive_items/textures/ground_sand_rock.png"
-dest_files=["res://.godot/imported/ground_sand_rock.png-e75b11e835df090bdd4dbe2d14fb6db9.s3tc.ctex"]
+source_file="res://interactive_items/iron_gauntlet/item_model/iron_gauntlet_texture_0.png"
+dest_files=["res://.godot/imported/iron_gauntlet_texture_0.png-eaefbb80e91756a955e49f01ad893811.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +23,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://textures/ground_sand_rock.png"
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

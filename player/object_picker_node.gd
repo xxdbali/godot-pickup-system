@@ -129,6 +129,10 @@ func restore_last_inventory_item():
 		print("Inventory item popped is empty.")
 		return
 
+	if not item.item_scene_path:
+		print("Inventory item has no scene path to instantiate in the world.")
+		return
+
 	var scene = load(item.item_scene_path)
 	if not scene:
 		print("Failed to load scene from inventory item.")

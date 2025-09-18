@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://ccls75jds5m4y" path="res://ui/item_list_sizer.gd" id="2_j1vmf"]
 [ext_resource type="PackedScene" uid="uid://snxdgklyhdyp" path="res://ui/inventory_slot.tscn" id="2_lsmr7"]
 [ext_resource type="Script" uid="uid://bfr6e0bwnlcsv" path="res://ui/auto_margin.gd" id="2_wij5n"]
-[ext_resource type="PackedScene" uid="uid://y0lnngee4e5g" path="res://ui/inventory_item_icon.tscn" id="3_ihvlr"]
+[ext_resource type="PackedScene" uid="uid://y0lnngee4e5g" path="res://ui/inventory_item.tscn" id="3_ihvlr"]
 
 [node name="inventory_ui" type="Control" node_paths=PackedStringArray("tabs")]
 layout_mode = 3

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://1fvm5sfsxtwl"]
+
+[ext_resource type="Script" uid="uid://kielivusu1ar" path="res://interactive_items/item_init.gd" id="1_xgiav"]
+[ext_resource type="PackedScene" uid="uid://c4di8ufy4t734" path="res://interactive_items/cristal_blade/item_model/cristal_blade.glb" id="2_ryw1a"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u52ul"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u52ul"]
+size = Vector3(0.200577, 1.90686, 0.707397)
+
+[node name="cristal_blade" type="RigidBody3D"]
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_u52ul")
+script = ExtResource("1_xgiav")
+metadata/pickable = true
+
+[node name="cristal_blade_model" parent="." instance=ExtResource("2_ryw1a")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0242081, 0.0476685, -0.0139771)
+shape = SubResource("BoxShape3D_u52ul")

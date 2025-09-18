@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clskq4rimebgb"
-path.s3tc="res://.godot/imported/ground_sand_rock_specular.png-7d48ab44276d4efe41993970409a648a.s3tc.ctex"
+uid="uid://kun0kmohmkwy"
+path.s3tc="res://.godot/imported/unnamed_specular.png-aef09e7ad299282ba3a68841df0e6918.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://interactive_items/textures/ground_sand_rock_specular.png"
-dest_files=["res://.godot/imported/ground_sand_rock_specular.png-7d48ab44276d4efe41993970409a648a.s3tc.ctex"]
+source_file="res://interactive_items/textures/unnamed_specular.png"
+dest_files=["res://.godot/imported/unnamed_specular.png-aef09e7ad299282ba3a68841df0e6918.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +20,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://textures/ground_sand_rock_specular.png"
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

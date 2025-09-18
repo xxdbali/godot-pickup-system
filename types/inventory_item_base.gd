@@ -10,7 +10,6 @@ class_name InventoryItemBase
 @export var category: int
 @export var default_rarity: int
 @export var icon_path: String = ""
-@export var item_scene_path: String = ""
 
 func _init(
 	p_id: int = -1,
@@ -20,7 +19,6 @@ func _init(
 	p_category: int = 0,
 	p_default_rarity: int = 0,
 	p_icon_path: String = "",
-	p_item_scene_path: String = ""
 ) -> void:
 	base_entity_id = p_id
 	name = p_name
@@ -29,4 +27,3 @@ func _init(
 	category = p_category
 	default_rarity = p_default_rarity
 	icon_path = p_icon_path
-	item_scene_path = p_item_scene_path
